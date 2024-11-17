@@ -47,6 +47,21 @@ app.get('/dashboard', authenticateUser, (req, res) => {
     res.sendFile(path.join(__dirname, 'src/views/dashboard-jobseeker.html'));
 });
 
+app.get('/components/:component', (req, res) => {
+    const componentPath = path.join(__dirname, 'src/views/components', req.params.component);
+    res.sendFile(componentPath);
+});
+
+app.get('/modals/:modal', (req, res) => {
+    const modalPath = path.join(__dirname, 'src/views/components/modals', req.params.modal);
+    res.sendFile(modalPath);
+});
+
+app.get('/images/:image', (req, res) => {
+    const imagePath = path.join(__dirname, 'src/public/images', req.params.image);
+    res.sendFile(imagePath);
+});
+
 app.get('/login', authenticateUser, (req, res) => {
     res.sendFile(path.join(__dirname, 'src/views/login.html'));
 });

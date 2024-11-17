@@ -1,0 +1,133 @@
+<!-- Subscription Section -->
+<section id="subscription" class="d-none">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Subscription</h2>
+        <button class="btn btn-outline-primary" id="viewBillingHistory">
+            <i class="bi bi-clock-history me-2"></i>Billing History
+        </button>
+    </div>
+
+    <!-- Current Plan Card -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Current Plan</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="mb-1" id="currentPlanName">Free Plan</h3>
+                            <p class="text-muted mb-0" id="currentPlanPrice">$0/month</p>
+                        </div>
+                        <div class="plan-status">
+                            <span class="badge bg-success" id="planStatus">Active</span>
+                        </div>
+                    </div>
+                    <div class="plan-features mb-4">
+                        <h6>Your Plan Features:</h6>
+                        <ul class="list-unstyled" id="currentFeatures">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>10 Job Applications/month</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Basic Resume Builder</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Email Support</li>
+                        </ul>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-primary" id="upgradePlan">Upgrade Plan</button>
+                        <button class="btn btn-outline-danger ms-2" id="cancelSubscription">Cancel Subscription</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Stats -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Usage Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="usage-stat mb-4">
+                        <label class="d-flex justify-content-between">
+                            Job Applications
+                            <span id="applicationCount">5/10</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%"></div>
+                        </div>
+                        <small class="text-muted">Resets in 15 days</small>
+                    </div>
+                    <div class="usage-stat mb-4">
+                        <label class="d-flex justify-content-between">
+                            Resume Downloads
+                            <span id="resumeCount">2/5</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 40%"></div>
+                        </div>
+                        <small class="text-muted">Resets in 15 days</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Available Plans -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Available Plans</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-4" id="availablePlans">
+                <!-- Free Plan -->
+                <div class="col-md-4">
+                    <div class="card h-100 plan-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Free Plan</h5>
+                            <h6 class="card-subtitle mb-3 text-muted">$0/month</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>10 Job Applications/month</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Basic Resume Builder</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Email Support</li>
+                            </ul>
+                            <button class="btn btn-outline-primary w-100" disabled>Current Plan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pro Plan -->
+                <div class="col-md-4">
+                    <div class="card h-100 plan-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pro Plan</h5>
+                            <h6 class="card-subtitle mb-3 text-muted">$9.99/month</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>50 Job Applications/month</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Advanced Resume Builder</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Priority Support</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Application Tracking</li>
+                            </ul>
+                            <button class="btn btn-primary w-100" data-plan="pro">Upgrade to Pro</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Premium Plan -->
+                <div class="col-md-4">
+                    <div class="card h-100 plan-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium Plan</h5>
+                            <h6 class="card-subtitle mb-3 text-muted">$19.99/month</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Unlimited Applications</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>AI Resume Optimization</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>24/7 Priority Support</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Advanced Analytics</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Automated Applications</li>
+                            </ul>
+                            <button class="btn btn-primary w-100" data-plan="premium">Upgrade to Premium</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
