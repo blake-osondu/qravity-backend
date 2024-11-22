@@ -17,9 +17,6 @@ class ComponentLoader {
                 this.loadComponent('billing-history-modal', '/modals/billing-history.html'),
             ]);
             
-            
-           
-           
             // Initialize navigation after components are loaded
             this.initializeNavigation();
             
