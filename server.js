@@ -7,8 +7,20 @@ const session = require('express-session');
 // const MongoStore = require('connect-mongo'); //Haven't decide to use this
 const { authenticateUser, allowUnauthenticatedAccess } = require('./src/middleware/auth');
 const AutomationService = require('./src/services/AutomationService');
+const cors = require('cors');
 
 const app = express();
+
+// CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:8080'], // Add your Flutter web port
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allow cookies if you're using them
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(express.static('src/public'));
@@ -40,43 +52,9 @@ AutomationService.initialize().catch(console.error);
 
 // Route handler for landing page
 app.get('/', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/index.html'));
+    res.send({"success": "qravity server started"});
 });
 
-app.get('/dashboard', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/dashboard-jobseeker.html'));
-});
-
-app.get('/components/:component', (req, res) => {
-    const componentPath = path.join(__dirname, 'src/views/components', req.params.component);
-    res.sendFile(componentPath);
-});
-
-app.get('/modals/:modal', (req, res) => {
-    const modalPath = path.join(__dirname, 'src/views/components/modals', req.params.modal);
-    res.sendFile(modalPath);
-});
-
-app.get('/images/:image', (req, res) => {
-    const imagePath = path.join(__dirname, 'src/public/images', req.params.image);
-    res.sendFile(imagePath);
-});
-
-app.get('/login', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/login.html'));
-});
-
-app.get('/signup', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/signup.html'));
-});
-
-app.get('/forgot-password', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/forgot-password.html'));
-});
-
-app.get('/reset-password', authenticateUser, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/views/reset-password.html'));
-});
 //Route handler for auth
 app.use('/auth', require('./src/routes/auth'));
 //Route handler for resume
