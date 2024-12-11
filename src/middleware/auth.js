@@ -9,7 +9,7 @@ const authenticateUser = async (req, res, next) => {
         }
 
         // For dashboard and protected routes
-        if (req.path.includes('/dashboard') || req.path.includes('/api/')) {
+        if (req.path.includes('/dashboard') || req._parsedOriginalUrl.path.includes('/api/')) {
             if (!req.session.userId) {
                 if (req.path.includes('/api/')) {
                     return res.status(401).json({ error: 'Unauthorized' });

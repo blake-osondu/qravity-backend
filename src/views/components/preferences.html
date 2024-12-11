@@ -105,3 +105,67 @@
         </div>
     </div>
 </section>
+
+<!-- Add this at the bottom of the file -->
+<script type="module">
+    import { 
+        loadPreferences, 
+        setupEventListeners,
+        showNotification 
+    } from '/js/preferences.js';
+
+    // Debug log
+    console.log('Preferences script loaded');
+
+    // Initialize when section becomes visible
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            // Debug log
+            console.log('Mutation detected:', mutation.target.id, mutation.target.classList.contains('d-none'));
+            
+            // Check if preferences section is visible
+            if (mutation.target.id === 'preferences' && !mutation.target.classList.contains('d-none')) {
+                console.log('Loading preferences...');
+                loadPreferences();
+                setupEventListeners();
+                showNotification('Preferences loaded');
+            }
+        });
+    });
+
+    // Get preferences section
+    const preferencesSection = document.getElementById('preferences');
+    
+    if (preferencesSection) {
+        // Debug log
+        console.log('Starting observer on preferences section');
+        
+        // Start observing
+        observer.observe(preferencesSection, { 
+            attributes: true, 
+            attributeFilter: ['class'] 
+        });
+
+        // If section is already visible, load preferences
+        if (!preferencesSection.classList.contains('d-none')) {
+            console.log('Preferences section already visible, loading...');
+            loadPreferences();
+            setupEventListeners();
+        }
+    } else {
+        console.error('Preferences section not found');
+    }
+</script>
+<script>
+    console.log('hello world');
+</script>
+<!-- Toast Notifications -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="notification-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+</div>

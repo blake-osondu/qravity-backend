@@ -13,33 +13,33 @@ class DashboardManager {
                 this.classList.add('active');
             });
         });
-
+        //This  will exist in automation js
         // Toggle automation
-        document.getElementById('automationToggle').addEventListener('change', async function() {
-            try {
-                const response = await fetch('/api/automation/toggle', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        enabled: this.checked
-                    })
-                });
+        // document.getElementById('automationToggle').addEventListener('change', async function() {
+        //     try {
+        //         const response = await fetch('/api/automation/toggle', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //             body: JSON.stringify({
+        //                 enabled: this.checked
+        //             })
+        //         });
                 
-                if (!response.ok) {
-                    throw new Error('Failed to update automation status');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                this.checked = !this.checked; // Revert the toggle if there's an error
-            }
-        });
+        //         if (!response.ok) {
+        //             throw new Error('Failed to update automation status');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error:', error);
+        //         this.checked = !this.checked; // Revert the toggle if there's an error
+        //     }
+        // });
 
         // Add this to your existing script section
         document.addEventListener('DOMContentLoaded', function() {
             // Section Navigation
-            const sections = ['overview', 'applications', 'preferences', 'resume', 'automation', 'subscription', 'profile', 'settings'];
+            const sections = ['applications', 'preferences', 'resume', 'automation', 'subscription', 'profile', 'settings'];
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -57,61 +57,64 @@ class DashboardManager {
                 });
             });
 
+            //This should go on resume js
             // Add Experience Button
-            document.getElementById('addExperience')?.addEventListener('click', function() {
-                const container = document.getElementById('experienceContainer');
-                const experienceCard = container.children[0].cloneNode(true);
-                // Clear input values
-                experienceCard.querySelectorAll('input, textarea').forEach(input => input.value = '');
-                container.appendChild(experienceCard);
-            });
-
+            // document.getElementById('addExperience')?.addEventListener('click', function() {
+            //     const container = document.getElementById('experienceContainer');
+            //     const experienceCard = container.children[0].cloneNode(true);
+            //     // Clear input values
+            //     experienceCard.querySelectorAll('input, textarea').forEach(input => input.value = '');
+            //     container.appendChild(experienceCard);
+            // });
+            //This should go on resume js
             // Add Education Button
-            document.getElementById('addEducation')?.addEventListener('click', function() {
-                const container = document.getElementById('educationContainer');
-                const educationCard = container.children[0].cloneNode(true);
-                // Clear input values
-                educationCard.querySelectorAll('input').forEach(input => input.value = '');
-                container.appendChild(educationCard);
-            });
+            // document.getElementById('addEducation')?.addEventListener('click', function() {
+            //     const container = document.getElementById('educationContainer');
+            //     const educationCard = container.children[0].cloneNode(true);
+            //     // Clear input values
+            //     educationCard.querySelectorAll('input').forEach(input => input.value = '');
+            //     container.appendChild(educationCard);
+            // });
 
+            //This should go on preferences js
             // Save Preferences
-            document.getElementById('savePreferences')?.addEventListener('click', async function() {
-                try {
-                    // Collect form data and send to server
-                    const formData = new FormData(document.getElementById('preferencesForm'));
-                    const response = await fetch('/api/preferences/save', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    if (response.ok) {
-                        // Show success message
-                        alert('Preferences saved successfully!');
-                    }
-                } catch (error) {
-                    console.error('Error saving preferences:', error);
-                    alert('Failed to save preferences. Please try again.');
-                }
-            });
+            // document.getElementById('savePreferences')?.addEventListener('click', async function() {
+            //     try {
+            //         // Collect form data and send to server
+            //         const formData = new FormData(document.getElementById('preferencesForm'));
+            //         const response = await fetch('/api/preferences/save', {
+            //             method: 'POST',
+            //             body: formData
+            //         });
+            //         if (response.ok) {
+            //             // Show success message
+            //             alert('Preferences saved successfully!');
+            //         }
+            //     } catch (error) {
+            //         console.error('Error saving preferences:', error);
+            //         alert('Failed to save preferences. Please try again.');
+            //     }
+            // });
 
+            // This should go on resume js
             // Save Resume
-            document.getElementById('saveResume')?.addEventListener('click', async function() {
-                try {
-                    // Collect form data and send to server
-                    const formData = new FormData(document.getElementById('resumeForm'));
-                    const response = await fetch('/api/resume/save', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    if (response.ok) {
-                        // Show success message
-                        alert('Resume saved successfully!');
-                    }
-                } catch (error) {
-                    console.error('Error saving resume:', error);
-                    alert('Failed to save resume. Please try again.');
-                }
-            });
+            // document.getElementById('saveResume')?.addEventListener('click', async function() {
+            //     try {
+            //         // Collect form data and send to server
+            //         const formData = new FormData(document.getElementById('resumeForm'));
+            //         const response = await fetch('/api/resume/save', {
+            //             method: 'POST',
+            //             body: formData
+            //         });
+            //         if (response.ok) {
+            //             // Show success message
+            //             alert('Resume saved successfully!');
+            //         }
+            //     } catch (error) {
+            //         console.error('Error saving resume:', error);
+            //         alert('Failed to save resume. Please try again.');
+            //     }
+            // });
 
             // Logout Button Handler
             document.getElementById('logoutBtn')?.addEventListener('click', async function() {

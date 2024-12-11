@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
+const API_URL = process.env.API_BASE_URL || '/api';
 
 class ApiService {
   constructor() {

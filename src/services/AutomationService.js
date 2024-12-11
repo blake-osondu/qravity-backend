@@ -1,5 +1,5 @@
-const AutomationSettings = require('../models/AutomationSettings');
-const JobPosting = require('../models/JobPosting');
+const AutomationSettings = require('../../models/AutomationSettings');
+const JobPosting = require('../../models/JobPosting');
 const { applicationQueue } = require('./queue/AutomationQueue');
 const cron = require('node-cron');
 

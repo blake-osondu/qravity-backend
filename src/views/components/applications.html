@@ -106,32 +106,3 @@
         </div>
     </div>
 </section>
-
-<!-- Add this at the bottom of the file -->
-<script type="module">
-    import { 
-        loadApplications, 
-        setupEventListeners, 
-        startAutoRefresh, 
-        stopAutoRefresh 
-    } from '/js/applications.js';
-
-    // Initialize when section becomes visible
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.target.classList.contains('d-none')) {
-                // Section was hidden
-                stopAutoRefresh();
-            } else {
-                // Section became visible
-                loadApplications();
-                setupEventListeners();
-                startAutoRefresh(30000); // Refresh every 30 seconds
-            }
-        });
-    });
-
-    // Start observing the applications section
-    observer.observe(document.getElementById('applications'), 
-        { attributes: true, attributeFilter: ['class'] });
-</script>

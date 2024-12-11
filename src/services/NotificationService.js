@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
-const User = require('../models/User');
-const Notification = require('../models/Notification');
-const config = require('../config');
+const User = require('../../models/User');
+const Notification = require('../../models/Notification');
+const config = require('../../config');
 
 class NotificationService {
     static transporter = nodemailer.createTransport(config.email);
