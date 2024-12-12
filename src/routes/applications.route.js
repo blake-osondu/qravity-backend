@@ -40,7 +40,7 @@ router.post('/', authenticateUser, async (req, res) => {
             userId: req.user._id,
             ...req.body
         });
-        
+        console.log(newApplication);
         await newApplication.save();
         res.status(201).json(newApplication);
     } catch (error) {

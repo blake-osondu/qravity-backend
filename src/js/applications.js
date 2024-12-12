@@ -15,13 +15,13 @@ let refreshInterval;
             currentApplications = applications;
             
             if (!applications || applications.length === 0) {
-                showEmptyState();
+                //showEmptyState();
                 return;
             }
             
             updateStatistics(applications);
             updateApplicationsTable(applications);
-            updatePagination(applications.length);
+            updatePaginationInfo(applications.length);
             
         } catch (error) {
             console.error('Error loading applications:', error);
@@ -91,9 +91,9 @@ let refreshInterval;
 
     function updateStatsDisplay(stats) {
         document.getElementById('totalApplications').textContent = stats.total;
-        document.getElementById('pendingApplications').textContent = stats.pending;
-        document.getElementById('activeApplications').textContent = stats.applied + stats.interviewing;
-        document.getElementById('successfulApplications').textContent = stats.offered;
+        // document.getElementById('pendingApplications').textContent = stats.pending;
+        // document.getElementById('activeApplications').textContent = stats.applied + stats.interviewing;
+        // document.getElementById('successfulApplications').textContent = stats.offered;
     }
 
     function updateApplicationsTable(applications) {
@@ -182,8 +182,7 @@ let refreshInterval;
             form.elements.position.value = application.position;
             form.elements.status.value = application.status;
             form.elements.source.value = application.source;
-            form.elements.appliedDate.value = new Date(application.appliedDate)
-                .toISOString().split('T')[0];
+            form.elements.appliedDate.value = new Date(application.appliedDate).toISOString().split('T')[0];
             form.elements.notes.value = application.notes;
             
             // Store application ID for update
@@ -259,22 +258,21 @@ let refreshInterval;
 
         // Add click handlers to pagination buttons
         paginationElement.querySelectorAll('.page-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const newPage = parseInt(e.target.dataset.page);
-            if (newPage && newPage !== currentPage) {
-                currentPage = newPage;
-                updateApplicationsTable(currentApplications);
-            }
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const newPage = parseInt(e.target.dataset.page);
+                if (newPage && newPage !== currentPage) {
+                    currentPage = newPage;
+                    updateApplicationsTable(currentApplications);
+                }
+            });
         });
-        });
-        }
+    }
+
     // Event Listeners
     function setupSearch() {
        
         console.log('will setup search');
-
-        
 
         function updateApplicationsTable(filteredApplications) {
             //This needs to be defined
@@ -307,7 +305,6 @@ let refreshInterval;
     function setupStatusFilter() {
         console.log('will set up status filter');
 
-
         document.querySelector('.dropdown-menu').addEventListener('click', (e) => {
             if (e.target.matches('[data-filter]')) {
                 e.preventDefault();
@@ -329,6 +326,7 @@ let refreshInterval;
 
     function setupApplicationForm() {
         console.log('will set up application form');
+        
         const saveButton = document.getElementById('saveApplication');
         if (!saveButton) return;
 
@@ -350,18 +348,37 @@ let refreshInterval;
                 appliedDate: formData.get('appliedDate'),
                 notes: formData.get('notes')
             };
-    
-            const response = await applicationsService.createApplication(applicationData);
-            
-            // Close modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('applicationDetailsModal'));
-            modal.hide();
-            
-            // Refresh applications list
-            await loadApplications();
-            
-            showNotification('Application added successfully');
-            form.reset();
+            if (!applicationData.company) {
+                
+                const error = document.getElementById('application-company-required');
+                error.setAttribute('class', 'application-required-error');
+            } else if (!applicationData.position) {
+               const error = document.getElementById('application-position-required');
+               error.setAttribute('class', 'application-required-error');
+            } else if (!applicationData.source) {
+                const error = document.getElementById('application-source-required');
+                error.setAttribute('class', 'application-required-error');
+                
+            } else {
+                
+                // const errors = document.getElementsByClassName('application-required-error');
+              
+                // errors.forEach((e) => {
+                    
+                // });
+
+                const response = await applicationsService.createApplication(applicationData);
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('applicationDetailsModal'));
+                modal.hide();
+                
+                // Refresh applications list
+                await loadApplications();
+                
+                showNotification('Application added successfully');
+                form.reset();
+            }
             
         } catch (error) {
             console.error('Error submitting application:', error);

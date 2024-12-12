@@ -162,3 +162,12 @@
     padding-top: 2rem;
     border-top: 1px solid #dee2e6;
 }
+
+.application-required-error {
+    color: red;
+    display: block;
+}
+.application-required-error-hidden {
+    color: red;
+    display: none;
+}
